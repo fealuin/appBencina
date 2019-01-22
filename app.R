@@ -9,6 +9,7 @@
 source('apiHelper.R')
 library(shiny)
 library(leaflet)
+library(leaflet.extras)
 
 data<-getBencineras()
 names(data[[3]]$ubicacion)=c('latitude','longitude')
@@ -30,7 +31,13 @@ server <- function(input, output) {
        addProviderTiles(providers$OpenStreetMap,
                         #,providerTileOptions(noWrap = TRUE)
                         ) %>%
-       addMarkers(data=data[[3]]$ubicacion)
+       addMarkers(data=data[[3]]$ubicacion)%>%
+       setView(lat =-33.437492 ,lng  =-70.651062 ,zoom=15)%>%
+       addControlGPS(options=gpsOptions(position = "topleft", activate = TRUE, 
+                                        autoCenter = TRUE, maxZoom = 15, 
+                                        setView = TRUE))%>%
+       activateGPS()
+     
    })
 }
 
