@@ -18,7 +18,8 @@ ui <- fluidPage(
    
    # Application title
    titlePanel("Precio bencina"),
-   leafletOutput('map')
+   
+   leafletOutput('map',height = '85vh')
  
 
 )
